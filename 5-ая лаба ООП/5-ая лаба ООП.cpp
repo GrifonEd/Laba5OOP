@@ -2,6 +2,20 @@
 #include <iostream>
 #include <string>
 using namespace std;
+void func1(Base obj) {
+    cout << "***** func1 *****\n";
+}
+
+void func2(Base* obj) {
+    cout << "***** func2 *****\n";
+}
+
+void func3(Base& obj) {
+    cout << "***** func3 *****\n";
+}
+
+
+
 class Animal {
 private :
     string name = "Animal";
@@ -79,7 +93,7 @@ public:
     }
 
 };
-class Cats : Animal {
+class Cats : public Animal {
 private:
     string name = "Cats";
 public:
@@ -114,11 +128,55 @@ public:
     }
 
 };
+class Base {
+public:
+    Base() {
+        cout << "Конструктор Base()\n";
+    }
+    Base(Base* obj) {
+        cout << "Конструктор Base(Base* obj)\n";
+    }
+    Base(Base& obj) {
+        cout << "Конструктор Base(Base& obj)\n";
+    }
+    ~Base() {
+        cout << "Деструктор ~Base()\n";
+    }
+};
+
+class Desc : public Base {
+public:
+    Desc() {
+        cout << "Конструктор Desc()\n";
+    }
+    Desc(Desc* obj) {
+        cout << "Конструктор Desc(Desc* obj)\n";
+    }
+    Desc(Desc& obj) {
+        cout << "Конструктор Desc(Desc& obj)\n";
+    }
+    ~Desc() {
+        cout << "Деструктор ~Desc()\n";
+    }
+};
 int main()
 {
     setlocale(LC_CTYPE, "Rus");
-    
-    
+    cout << "Создание объектов классов Animal, Birds и Cats:\n\n";
+    Animal* ani1 = new Animal();
+    cout << endl;
+    Birds* ani2 = new Birds();
+    cout << endl;
+    Animal*ani3 = new Cats();
+    cout << endl;
+    system("pause");
+    system("cls");
+    cout << "Проверка на принадлежность к определенному классу:\n\n";
+
+
+
+
+
     
 }
 
