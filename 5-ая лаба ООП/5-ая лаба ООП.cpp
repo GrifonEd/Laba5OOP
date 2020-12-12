@@ -38,38 +38,59 @@ public:
     }
     virtual void show()
     {
-        cout << "Тут животное";
+        cout << "Тут животное\n";
     }
 
 };
 class Birds : public Animal { //Создание класса наследника
-protected:
-    int SizeWings;                        //Создание атрибутов наследования 
+private:
+    string name = "Birds";
 public:
-    Birds() : Animal() {                        // Создание Конструктора без параметров 
-        printf("Birds()\n");
-        SizeWings = 0;
+    Birds()  {                        // Создание Конструктора без параметров 
+        cout<<"Базовый конструктор Birds()\n";
+  
     }
     Birds(int size, int age, int SizeWings) : Animal(size, age) {            // Создание Конструктора с параметрами
         printf("Birds(int size, int age,int SizeWings)\n");
         this->SizeWings = SizeWings;
     }
-    Birds(const Birds& a) {                  // Создание Конструктора копирования
-        printf("Birds(const Birds& a)\n");
-        size = a.size;
-        age = a.age;
-        SizeWings = a.SizeWings;
+    Birds(Birds& Bird) {                  // Создание Конструктора копирования
+        size = Bird.size;
+        age = Bird.age;
+        cout<<"Копирующий консруктор Birds (const Birds& Bird)\n";
     }
     ~Birds() {                      // Создание деструктора
-        printf("%d, %d, %d\n", size, age, SizeWings);
-        printf("~Birds()\n");
+       cout<<"Деструктор ~Birds()\n";
     }
-    void train_fly(int new_SizeWings) {
-        SizeWings = new_SizeWings;
+    void train_fly() {
     }
     void show()
     {
         cout << "Тут птица";
+    }
+
+};
+class Cats : Animal {
+private:
+    string name = "Cats";
+public:
+    Cats() {
+        size = 10;
+        age = 0;
+        cout << "Базовый конструктор Cats\n ";
+    }
+    Cats() {
+        size = 10;
+        age = 0;
+        cout << "Базовый конструктор Cats\n ";
+    }
+    Cats(Cats& cat) {
+        size = cat.size;
+        age = cat.size;
+        cout << "Конструктор копирования Cats(Cat& cats)\n ";
+    }
+    ~Cats() {
+        cout << "Деструктор Сats\n";
     }
 
 };
