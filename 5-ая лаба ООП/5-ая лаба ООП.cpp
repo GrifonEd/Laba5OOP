@@ -10,35 +10,37 @@ protected:
 public:
 
     Animal() {                        // Создание Конструктора без параметров 
-        printf("Animal()\n");
+        cout<<"Базовый конструктор Animal()\n";
         size = 0;
         age = 0;
     }
     Animal(int size, int age) {            // Создание Конструктора с параметрами
-        printf("Animal(int size, int age)\n");
+        cout<<"Конструктор с параметрами Animal(int size, int age)\n";
         this->size = size;
         this->age = age;
     }
-    Animal(const Animal& a) {                  // Создание Конструктора копирования
-        printf("Animal(const Animal &a)\n");
-        size = a.size;
-        age = a.age;
+    Animal( Animal& Animal) {                  // Создание Конструктора копирования
+        cout<<"Копирующий конуструктор Animal(const Animal &a)\n";
+        size = Animal.size;
+        age = Animal.age;
     }
-    ~Animal() {                      // Создание деструктора
-        printf("%d, %d \n", size, age);
-        printf("~Animal()\n");
+    virtual ~Animal() {                      // Создание деструктора
+        cout << "Вертуальный деструктор Animal";
     }
-    void train(int time, int strength) {
-        size = size + time * strength;
-        age = age + time * strength;
+    virtual string ClassName() {
+        cout << "Виртуальный метод ClassName(Animal)\n";
+        return name;
     }
-    int recreation()
+    virtual bool isA(string proverka) {
+        cout << "Виртуальный метод isA Animal\n";
+        if (name == proverka)
+            return true;
+        else
+            return false;
+    }
+    void show()
     {
-        return size;
-    }
-    virtual void show()
-    {
-        cout << "Тут животное\n";
+        cout << "Наследуемый метод\n";
     }
 
 };
@@ -50,9 +52,10 @@ public:
         cout<<"Базовый конструктор Birds()\n";
   
     }
-    Birds(int size, int age, int SizeWings) : Animal(size, age) {            // Создание Конструктора с параметрами
-        printf("Birds(int size, int age,int SizeWings)\n");
-        this->SizeWings = SizeWings;
+    Birds(int size, int age) {            // Создание Конструктора с параметрами
+        this->size = size;
+        this->age = age;
+        cout << "Конструктор с параметрами Birds\n";
     }
     Birds(Birds& Bird) {                  // Создание Конструктора копирования
         size = Bird.size;
@@ -62,11 +65,17 @@ public:
     ~Birds() {                      // Создание деструктора
        cout<<"Деструктор ~Birds()\n";
     }
-    void train_fly() {
+    string ClassName() {
+        cout << "Виртуальный метод ClassName(Birds)\n";
+        return name;
     }
-    void show()
-    {
-        cout << "Тут птица";
+
+    bool isA(string proverka) {
+        cout << "Виртуальный метод isA(Birds)\n";
+        if (name == proverka)
+            return true;
+        else
+            return false;
     }
 
 };
@@ -79,15 +88,26 @@ public:
         age = 0;
         cout << "Базовый конструктор Cats\n ";
     }
-    Cats() {
-        size = 10;
-        age = 0;
-        cout << "Базовый конструктор Cats\n ";
+    Cats(int size1,int age1) {
+        size = size1;
+        age = age1;
+        cout << "конструктор с параметрами Cats\n ";
     }
     Cats(Cats& cat) {
         size = cat.size;
         age = cat.size;
         cout << "Конструктор копирования Cats(Cat& cats)\n ";
+    }
+    string ClassName() {
+        cout << "Виртуальный метод ClassName(Cats)\n";
+        return name;
+    }
+    bool isA(string proverka) {
+        cout << "Виртуальный метод isA(Cats)\n";
+        if (name == proverka)
+            return true;
+        else
+            return false;
     }
     ~Cats() {
         cout << "Деструктор Сats\n";
@@ -97,12 +117,7 @@ public:
 int main()
 {
     setlocale(LC_CTYPE, "Rus");
-    Animal* Ani = new Animal(50, 60);
-    Ani->show();
-    //delete Ani;
-    Birds *Milky = new Birds(10, 20, 30);
-    Milky->recreation();
-    //delete Milky;
+    
     
     
 }
