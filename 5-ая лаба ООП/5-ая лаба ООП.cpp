@@ -2,17 +2,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-void func1(Base obj) {
-    cout << "***** func1 *****\n";
-}
 
-void func2(Base* obj) {
-    cout << "***** func2 *****\n";
-}
-
-void func3(Base& obj) {
-    cout << "***** func3 *****\n";
-}
 
 
 
@@ -51,6 +41,10 @@ public:
             return true;
         else
             return false;
+    }
+    void NoVirtual()
+    {
+        cout << "Невертуальный метод для Animal\n";
     }
     void show()
     {
@@ -91,6 +85,10 @@ public:
         else
             return false;
     }
+    void NoVirtual()
+    {
+        cout << "Невертуальный метод для Birds\n";
+    }
 
 };
 class Cats : public Animal {
@@ -126,6 +124,10 @@ public:
     ~Cats() {
         cout << "Деструктор Сats\n";
     }
+    void NoVirtual()
+    {
+        cout << "Невертуальный метод для Cats\n";
+    }
 
 };
 class Base {
@@ -159,6 +161,17 @@ public:
         cout << "Деструктор ~Desc()\n";
     }
 };
+void func1(Base obj) {
+    cout << "***** func1 *****\n";
+}
+
+void func2(Base* obj) {
+    cout << "***** func2 *****\n";
+}
+
+void func3(Base& obj) {
+    cout << "***** func3 *****\n";
+}
 int main()
 {
     setlocale(LC_CTYPE, "Rus");
@@ -173,11 +186,44 @@ int main()
     system("cls");
     cout << "Проверка на принадлежность к определенному классу:\n\n";
 
+    cout << "Метод ClassName\n";
+    cout << ani1->ClassName() << endl;
+    cout << ani2->ClassName() << endl;
+    cout << ani3->ClassName() << endl << endl;
 
+    cout << "Метод isA\n";
+    if (ani1->isA("Animal")) cout << "Да, это животное\n";
+    else cout << "Нет, это не животное\n";
+    if (ani2->isA("Animal")) cout << "Да, это животное\n";
+    else cout << "Нет, это не животное\n";
+    if (ani3->isA("Cats")) cout << "Да, это кот\n";
+    else cout << "Нет, это не кот\n";
 
+    ani1->show();
+    ani2->show();
+    ani3->show();
 
+    cout << endl;
+    system("pause");
+    system("cls");
 
-    
+    cout << "Безопасное приведение типов (dynamic_cast):\n\n";
+
+    Cats* ani4 = dynamic_cast<Cats*>(ani3);
+    cout << ani3->ClassName() << endl;
+    ani4->NoVirtual();
+    ani3->NoVirtual();
+    cout << "\n\n";
+    cout << "\nОпасное приведение типов:\n";
+    Cats* ani5 = new Cats;
+    if (ani3->isA("Cats"))
+        ani5 = (Cats*)ani3;
+    cout << ani5->ClassName() << endl;
+    cout << endl;
+    system("pause");
+    system("cls");
+
+    cout << "Уда";
 }
 
 
