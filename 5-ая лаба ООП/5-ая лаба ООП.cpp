@@ -1,20 +1,89 @@
-﻿// 5-ая лаба ООП.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
+﻿
 #include <iostream>
+#include <string>
+using namespace std;
+class Animal {
+private :
+    string name = "Animal";
+protected:
+    int size, age;
+public:
 
+    Animal() {                        // Создание Конструктора без параметров 
+        printf("Animal()\n");
+        size = 0;
+        age = 0;
+    }
+    Animal(int size, int age) {            // Создание Конструктора с параметрами
+        printf("Animal(int size, int age)\n");
+        this->size = size;
+        this->age = age;
+    }
+    Animal(const Animal& a) {                  // Создание Конструктора копирования
+        printf("Animal(const Animal &a)\n");
+        size = a.size;
+        age = a.age;
+    }
+    ~Animal() {                      // Создание деструктора
+        printf("%d, %d \n", size, age);
+        printf("~Animal()\n");
+    }
+    void train(int time, int strength) {
+        size = size + time * strength;
+        age = age + time * strength;
+    }
+    int recreation()
+    {
+        return size;
+    }
+    virtual void show()
+    {
+        cout << "Тут животное";
+    }
+
+};
+class Birds : public Animal { //Создание класса наследника
+protected:
+    int SizeWings;                        //Создание атрибутов наследования 
+public:
+    Birds() : Animal() {                        // Создание Конструктора без параметров 
+        printf("Birds()\n");
+        SizeWings = 0;
+    }
+    Birds(int size, int age, int SizeWings) : Animal(size, age) {            // Создание Конструктора с параметрами
+        printf("Birds(int size, int age,int SizeWings)\n");
+        this->SizeWings = SizeWings;
+    }
+    Birds(const Birds& a) {                  // Создание Конструктора копирования
+        printf("Birds(const Birds& a)\n");
+        size = a.size;
+        age = a.age;
+        SizeWings = a.SizeWings;
+    }
+    ~Birds() {                      // Создание деструктора
+        printf("%d, %d, %d\n", size, age, SizeWings);
+        printf("~Birds()\n");
+    }
+    void train_fly(int new_SizeWings) {
+        SizeWings = new_SizeWings;
+    }
+    void show()
+    {
+        cout << "Тут птица";
+    }
+
+};
 int main()
 {
-    std::cout << "Hello World!\n";
+    setlocale(LC_CTYPE, "Rus");
+    Animal* Ani = new Animal(50, 60);
+    Ani->show();
+    //delete Ani;
+    Birds *Milky = new Birds(10, 20, 30);
+    Milky->recreation();
+    //delete Milky;
+    
+    
 }
 
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
 
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
