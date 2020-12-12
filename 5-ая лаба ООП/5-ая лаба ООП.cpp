@@ -223,7 +223,51 @@ int main()
     system("pause");
     system("cls");
 
-    cout << "Уда";
+    cout << "Удаление объектов\n\n";
+    cout << "Удаление объектов виртуальным деструктором\n";
+    delete ani1;
+    delete ani2;
+    delete ani3;
+    cout << endl << "Удаление объекта невиртуальным дескруктором";
+    cout << endl << endl;
+    Base* probnik = new Desc();
+    delete probnik;
+    cout << endl << endl;
+    Base* probnik2 = new Base();
+    delete probnik2;
+    cout << endl << endl;
+    Desc* probnik3 = new Desc();
+    delete probnik3;
+    cout << endl;
+    system("pause");
+    system("cls");
+    cout << "Работа с передачей объектов в функцию\n\n";
+
+    cout << "Работа с Base:\n";
+    Base base1;
+    func1(base1);
+    cout << endl;
+    Base* base2 = new Base();
+    func2(base2);
+    cout << endl;
+    Base base3;
+    func3(base3);
+    cout << endl;
+
+    cout << "Работа с Desc:\n";
+    Desc Desc1;
+    func1(Desc1);
+    cout << endl;
+    Desc* Desc2 = new Desc();
+    func2(Desc2);
+    cout << endl;
+    Desc Desc3;
+    func3(Desc3);
+    cout << endl;
+
+    Base* base4 = new Desc();
+    func2(base2);
+    cout << endl;
 }
 
 
